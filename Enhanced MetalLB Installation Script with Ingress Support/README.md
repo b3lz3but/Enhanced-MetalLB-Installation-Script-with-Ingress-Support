@@ -159,9 +159,6 @@ For more troubleshooting guides, see [Troubleshooting](docs/installation.md#trou
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## Security
-
-For security issues, please see [SECURITY.md](SECURITY.md) or email security@yourdomain.com.
 
 ## License
 
@@ -172,14 +169,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [MetalLB Documentation](https://metallb.universe.tf/)
 - [Traefik Documentation](https://doc.traefik.io/traefik/)
 - [Kubernetes Documentation](https://kubernetes.io/docs/)
-
-## Support
-
-For support:
-1. Check the [documentation](docs/installation.md)
-2. Open an issue
-3. Join our [Slack channel](#)
-
-## Further Reading
-
-For detailed documentation about installation, configuration, and best practices, please refer to our [Installation Guide](docs/installation.md).
