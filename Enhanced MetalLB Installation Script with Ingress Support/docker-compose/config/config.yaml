@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: metallb-system
+  name: config
+data:
+  config: |-
+    # MetalLB configuration
+    address-pools:
+    - name: default
+      protocol: layer2
+      addresses:
+      # Replace with your IP address range
+      - ${LOADBALANCER_IP_START}-${LOADBALANCER_IP_END}

@@ -1,0 +1,51 @@
+version: "3.8"
+
+services:
+  # MetalLB Controller Service
+  metallb-controller:
+    image: metallb/controller:${METALLB_VERSION}
+    container_name: metallb-controller
+    volumes:
+      - ./config:/config # Mount the configuration directory
+    command: ["controller", "--config", "/config/config.yaml"]
+    restart: always
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:7472/healthz"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # MetalLB Speaker Service
+  metallb-speaker:
+    image: metallb/speaker:${METALLB_VERSION}
+    container_name: metallb-speaker
+    network_mode: host # Use host network mode
+    cap_add:
+      - NET_ADMIN # Add NET_ADMIN capability
+    restart: always
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:7472/healthz"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Nginx Service
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - "80:80" # Expose port 80
+    restart: always
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+volumes:
+  config:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: ${PWD}/config # Bind the config directory from the current working directory
